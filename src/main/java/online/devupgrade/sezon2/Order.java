@@ -121,9 +121,12 @@ interface IVisitor {
 //instant delivery
 //prawie event sourcing
 //CQ(R)S
-
+//security
 //Mob Programming
 //scrum
 //agile
+
+//framework-less
+
 
 //triple lazy (LIE)

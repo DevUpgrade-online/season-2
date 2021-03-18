@@ -1,0 +1,13 @@
+Dodawanie nowego produktu do zamówienia. Produkty muszą mieć cenę w b w bazie (not null)
+Obliczanie całkowitej wartości zamówienia.
+Oblicznie całkowitej wartości zamówienia, które jeszcze nie jest zamówieniem
+Produkty, które nie mają ceny
+Wyświetlanie na zamówienia na UI przez REST API
+Zapis zamówienia do bazy danych
+Naliczanie rabatu do zamówieia w zależności od rodzaju użytkownika
+Anulowanie zamówienia
+Anulowanie anulowania zamówienia
+Zamówienia z kwotami w roznych walutach
+Zwrot pieniedzy z anulowanego zamówienia - wystawienie zamówienia przeciwnego
+Zatwierdzonych zamowien nie mozna zmieniać, chyba, ze status usera jest Obersturmführer
+Zamówienie bez zamówienia - szybka sciezka
