@@ -1,7 +1,6 @@
 package online.devupgrade.sezon2;
 
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class ProductManagerLogicService {
@@ -24,8 +23,8 @@ public class ProductManagerLogicService {
                 .collect(Collectors.toList());
     }
 
-    void consumeProduct(Consumer<ProductCommand> consumer) {
-        consumer.accept(p1 -> DatabaseUtilsHelper.save("products_list", p1, DatabaseUtilsHelper.TransactionIsolationLevel.DWA));
+    void consumeProduct(java.util.function.Supplier<ProductCommand> consumer) {
+         DatabaseUtilsHelper.save("products_list", consumer.get(), DatabaseUtilsHelper.TransactionIsolationLevel.DWA);
     }
 
     public void setOrderRepo(OrderRepo orderRepo) {

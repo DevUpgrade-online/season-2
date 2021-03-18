@@ -16,7 +16,13 @@ public class Product implements Pricable {
 
     protected boolean isPriceGetOnce;
 
+    private static final String KROPKA = ".";
+
     @Override
+    public Float getPrice() {
+        return price;
+    }
+
     public Float getPrice(boolean canSee, Float promoPrice) {
         if (!isPriceGetOnce) {
             float[] split = XXxxxUtils.convert(promoPrice);
@@ -73,8 +79,8 @@ class ProductWithCurrency extends Product implements Pricable {
     }
 
     @Override
-    public float getPrice() {
-        return super.getPrice();
+    public Float getPrice() {
+        return null;
     }
 }
 
@@ -87,5 +93,5 @@ class NotAProductProductWithCurrency extends ProductWithCurrency implements Pric
 }
 
 interface Pricable {
-    float getPrice();
+    Float getPrice();
 }
