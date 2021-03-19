@@ -38,6 +38,11 @@ public class Product implements Pricable {
         return null;
     }
 
+    public Float setPrice(Float price) {
+        this.price = price;
+        return price;
+    }
+
     @Override
     public String toString() {
         return String.format("%d.%dPLN", price, pricePoPrzecinku);
