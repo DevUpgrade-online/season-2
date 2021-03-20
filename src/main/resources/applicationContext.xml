@@ -5,9 +5,7 @@
 <beans>
 
     <bean id="CreateEmptyOrderCommand" class="online.devupgrade.sezon2.services.CreateEmptyOrderCommandHandler">
-<!--        <constructor-arg name="accountRepository" ref="accountRepository" />-->
     </bean>
     <bean id="FindOrdersCommand" class="online.devupgrade.sezon2.services.FindOrdersCommandHandler">
-<!--        <constructor-arg name="accountRepository" ref="accountRepository" />-->
     </bean>
 </beans>

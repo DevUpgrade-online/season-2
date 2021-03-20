@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-
 public class OrderRepo {
+//wzorzec adapter
 
     @Autowired
     OrderRepositoryImpl orderRepository;
@@ -17,6 +17,6 @@ public class OrderRepo {
     }
 
     List<Order> loadAll() {
-        return new ArrayList(Collections.singleton(orderRepository.findAll()));
+        return orderRepository.findAll();
     }
 }

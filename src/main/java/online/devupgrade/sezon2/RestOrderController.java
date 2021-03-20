@@ -23,6 +23,8 @@ public class RestOrderController {
             handler.get(commandName).handle(new FindOrdersCommand());
         } catch (ResultTransporterException e) {
             return (List<OrderDTO>) e.getData();
+        } catch (NullPointerException e) {
+            return List.of();
         }
         System.out.println("nie udalo sie");
         return List.of();
