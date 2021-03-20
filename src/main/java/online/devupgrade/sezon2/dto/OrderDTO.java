@@ -1,6 +1,8 @@
-package online.devupgrade.sezon2;
+package online.devupgrade.sezon2.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import online.devupgrade.sezon2.entities.Order;
+import online.devupgrade.sezon2.entities.Product;
 
 import java.util.List;
 

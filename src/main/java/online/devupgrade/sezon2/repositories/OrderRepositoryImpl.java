@@ -1,5 +1,6 @@
-package online.devupgrade.sezon2;
+package online.devupgrade.sezon2.repositories;
 
+import online.devupgrade.sezon2.entities.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

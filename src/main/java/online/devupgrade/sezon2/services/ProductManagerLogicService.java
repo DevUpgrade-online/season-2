@@ -1,6 +1,12 @@
-package online.devupgrade.sezon2;
+package online.devupgrade.sezon2.services;
 
+import online.devupgrade.sezon2.dto.OrderDTO;
+import online.devupgrade.sezon2.dto.ProductCommand;
+import online.devupgrade.sezon2.entities.Order;
+import online.devupgrade.sezon2.entities.Product;
+import online.devupgrade.sezon2.repositories.OrderRepo;
 import online.devupgrade.sezon2.utilshelpers.DatabaseUtilsHelper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,6 +15,7 @@ import java.util.stream.Collectors;
 @Service
 public class ProductManagerLogicService {
 
+    @Autowired
     private OrderRepo orderRepo;
 
     public OrderDTO loadOrder(Integer orderId) {

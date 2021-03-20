@@ -1,4 +1,4 @@
-package online.devupgrade.sezon2;
+package online.devupgrade.sezon2.entities;
 
 import com.sun.istack.NotNull;
 
@@ -6,14 +6,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Arrays;
-import java.util.Optional;
 
 @Entity
 public class Product implements Pricable {
 
     @Id
     @GeneratedValue
-    private Integer id;
+    public Integer id;
 
     @NotNull
     private float price;

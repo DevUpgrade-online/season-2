@@ -1,5 +1,9 @@
 package online.devupgrade.sezon2;
 
+import online.devupgrade.sezon2.entities.DefaultStatus;
+import online.devupgrade.sezon2.entities.Order;
+import online.devupgrade.sezon2.entities.Product;
+import online.devupgrade.sezon2.utilshelpers.OrderPriceSumCalculator;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 

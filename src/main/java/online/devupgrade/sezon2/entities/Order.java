@@ -1,4 +1,7 @@
-package online.devupgrade.sezon2;
+package online.devupgrade.sezon2.entities;
+
+import online.devupgrade.sezon2.helper.IOrderStatus;
+import online.devupgrade.sezon2.helper.IVisitor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -71,11 +74,6 @@ public class Order extends Product {
              });
          throw new IllegalStateException("Nie bede tu!");
     }
-}
-
-interface IVisitor {
-
-    Optional<Boolean> visit(List<Product> products, Optional<Map<String, Object>> params);
 }
 
 //commmand

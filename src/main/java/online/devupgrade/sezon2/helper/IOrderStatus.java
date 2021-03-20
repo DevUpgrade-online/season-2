@@ -1,4 +1,4 @@
-package online.devupgrade.sezon2;
+package online.devupgrade.sezon2.helper;
 
 import java.io.Serializable;
 

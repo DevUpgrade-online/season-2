@@ -1,7 +1,7 @@
 package online.devupgrade.sezon2.utilshelpers;
 
-import online.devupgrade.sezon2.Product;
-import online.devupgrade.sezon2.ProductCommand;
+import online.devupgrade.sezon2.entities.Product;
+import online.devupgrade.sezon2.dto.ProductCommand;
 
 import java.util.List;
 

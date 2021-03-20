@@ -1,22 +1,23 @@
-package online.devupgrade.sezon2;
+package online.devupgrade.sezon2.repositories;
 
+import online.devupgrade.sezon2.entities.Order;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
+
+@Service
 public class OrderRepo {
 //wzorzec adapter
 
     @Autowired
     OrderRepositoryImpl orderRepository;
 
-    Order load(Integer orderId) {
+    public Order load(Integer orderId) {
         return orderRepository.findById(orderId).isPresent() ? orderRepository.findById(orderId).get() : null;
     }
 
-    List<Order> loadAll() {
+    public List<Order> loadAll() {
         return orderRepository.findAll();
     }
 }

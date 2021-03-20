@@ -1,4 +1,4 @@
-package online.devupgrade.sezon2;
+package online.devupgrade.sezon2.dto;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ public class ResultTransporterException extends RuntimeException {
         this.data = data;
     }
 
-    Object getData() {
+    public Object getData() {
         return data;
     }
 }
