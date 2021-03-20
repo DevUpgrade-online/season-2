@@ -3,11 +3,17 @@ package online.devupgrade.sezon2;
 import com.sun.istack.NotNull;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Arrays;
 import java.util.Optional;
 
 @Entity
 public class Product implements Pricable {
+
+    @Id
+    @GeneratedValue
+    private Integer id;
 
     @NotNull
     private float price;

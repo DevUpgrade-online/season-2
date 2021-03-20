@@ -1,13 +1,17 @@
 package online.devupgrade.sezon2;
 
+import online.devupgrade.sezon2.utilshelpers.DatabaseUtilsHelper;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class ProductManagerLogicService {
 
     private OrderRepo orderRepo;
 
-    OrderDTO loadOrder(Integer orderId) {
+    public OrderDTO loadOrder(Integer orderId) {
         Order order = orderRepo.load(orderId);
         List<Product> productsFromOrder = DatabaseUtilsHelper.get("products_table", orderId, DatabaseUtilsHelper.TransactionIsolationLevel.JEDEN); //1 = read uncommited
         productsFromOrder.forEach(product ->  order.getProducts().add(product));
@@ -15,7 +19,7 @@ public class ProductManagerLogicService {
         return orderDTO;
     }
     
-    List<OrderDTO> loadOrders() {
+    public List<OrderDTO> loadOrders() {
         return orderRepo
                 .loadAll()
                 .stream()

@@ -1,3 +1,7 @@
 package online.devupgrade.sezon2;
-public interface IOrderStatus {
+
+import java.io.Serializable;
+
+public interface IOrderStatus extends Serializable {
+    Integer getStatusSerializableValue();
 }

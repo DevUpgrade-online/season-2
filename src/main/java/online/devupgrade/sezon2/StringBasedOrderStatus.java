@@ -30,4 +30,9 @@ public class StringBasedOrderStatus implements  IOrderStatus, CharSequence{
     public IntStream codePoints() {
         return null;
     }
+
+    @Override
+    public Integer getStatusSerializableValue() {
+        return length();
+    }
 }
