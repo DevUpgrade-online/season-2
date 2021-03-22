@@ -1,13 +1,18 @@
-package online.devupgrade.sezon2;
+package online.devupgrade.sezon2.entities;
 
 import com.sun.istack.NotNull;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Arrays;
-import java.util.Optional;
 
 @Entity
 public class Product implements Pricable {
+
+    @Id
+    @GeneratedValue
+    public Integer id;
 
     @NotNull
     private float price;
@@ -36,6 +41,11 @@ public class Product implements Pricable {
             return Float.parseFloat(price + KROPKA + pricePoPrzecinku);
         }
         return null;
+    }
+
+    public Float setPrice(Float price) {
+        this.price = price;
+        return price;
     }
 
     @Override

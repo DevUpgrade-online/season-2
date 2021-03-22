@@ -1,8 +1,10 @@
-package online.devupgrade.sezon2;
+package online.devupgrade.sezon2.entities;
+
+import online.devupgrade.sezon2.helper.IOrderStatus;
 
 import java.util.stream.IntStream;
 
-public class StringBasedOrderStatus implements  IOrderStatus, CharSequence{
+public class StringBasedOrderStatus implements IOrderStatus, CharSequence{
 
     private String implHelper; //kompozycja
 
@@ -29,5 +31,10 @@ public class StringBasedOrderStatus implements  IOrderStatus, CharSequence{
     @Override
     public IntStream codePoints() {
         return null;
+    }
+
+    @Override
+    public Integer getStatusSerializableValue() {
+        return length();
     }
 }

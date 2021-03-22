@@ -1,4 +1,7 @@
-package online.devupgrade.sezon2;
+package online.devupgrade.sezon2.entities;
+
+import online.devupgrade.sezon2.helper.IOrderStatus;
+import online.devupgrade.sezon2.helper.IVisitor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,7 +25,7 @@ public class Order extends Product {
 
     }
 
-    private IOrderStatus status;
+    public IOrderStatus status;
 
     @Id
     @GeneratedValue
@@ -38,9 +41,16 @@ public class Order extends Product {
         return products;
     }
 
-    public Order setProducts(List<Product> products) {
+    public Order setProducts(List<Product> products, Optional<IOrderStatus> orderStatus) {
         if (products == null) {
             products = new ArrayList<>();
+        }
+        if(orderStatus.isPresent() ) {
+            status = orderStatus.get();
+        } else {
+            if(products.size() > 0) {
+                status = DefaultStatus.W_Przygotowaniu;
+            }
         }
         boolean result = products.stream()
                 .anyMatch(product -> product instanceof NotAProductProduct); //pattern matching
@@ -64,12 +74,6 @@ public class Order extends Product {
              });
          throw new IllegalStateException("Nie bede tu!");
     }
-}
-
-
-interface IVisitor {
-
-    Optional<Boolean> visit(List<Product> products, Optional<Map<String, Object>> params);
 }
 
 //commmand

@@ -1,13 +1,24 @@
-package online.devupgrade.sezon2;
+package online.devupgrade.sezon2.services;
+
+import online.devupgrade.sezon2.dto.OrderDTO;
+import online.devupgrade.sezon2.dto.ProductCommand;
+import online.devupgrade.sezon2.entities.Order;
+import online.devupgrade.sezon2.entities.Product;
+import online.devupgrade.sezon2.repositories.OrderRepo;
+import online.devupgrade.sezon2.utilshelpers.DatabaseUtilsHelper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class ProductManagerLogicService {
 
+    @Autowired
     private OrderRepo orderRepo;
 
-    OrderDTO loadOrder(Integer orderId) {
+    public OrderDTO loadOrder(Integer orderId) {
         Order order = orderRepo.load(orderId);
         List<Product> productsFromOrder = DatabaseUtilsHelper.get("products_table", orderId, DatabaseUtilsHelper.TransactionIsolationLevel.JEDEN); //1 = read uncommited
         productsFromOrder.forEach(product ->  order.getProducts().add(product));
@@ -15,7 +26,7 @@ public class ProductManagerLogicService {
         return orderDTO;
     }
     
-    List<OrderDTO> loadOrders() {
+    public List<OrderDTO> loadOrders() {
         return orderRepo
                 .loadAll()
                 .stream()
