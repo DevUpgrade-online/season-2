@@ -4,6 +4,7 @@ import online.devupgrade.sezon2.entities.DefaultStatus;
 import online.devupgrade.sezon2.entities.DiscountEntity;
 import online.devupgrade.sezon2.entities.Order;
 import online.devupgrade.sezon2.entities.Product;
+import online.devupgrade.sezon2.utilshelpers.DiscountedPriceSumCalculator;
 import online.devupgrade.sezon2.utilshelpers.OrderPriceSumCalculator;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
@@ -39,11 +40,12 @@ public class EnterpriseOrderConstructorTests {
         of.setValue(20L);
         as.setDiscountEntities(List.of(of));
         as.setProducts(prods, Optional.empty());
-        OrderPriceSumCalculator orderPriceSumCalculator = new OrderPriceSumCalculator();
+        DiscountedPriceSumCalculator discountedPriceSumCalculator = new DiscountedPriceSumCalculator();
         //when
-        as.Visit(orderPriceSumCalculator);
+        as.Visit(discountedPriceSumCalculator);
+
         //result
-        Assert.assertEquals(80f, (float) orderPriceSumCalculator.sumMantisa.sum, 0f);
+        Assert.assertEquals(80f, (float) discountedPriceSumCalculator.sumMantisa.sum, 0f);
         Assert.assertEquals(DefaultStatus.W_Przygotowaniu, as.status);
     }
 
@@ -57,11 +59,11 @@ public class EnterpriseOrderConstructorTests {
         of.setExcluded(List.of(prods.get(0)));
         as.setDiscountEntities(List.of(of));
         as.setProducts(prods, Optional.empty());
-        OrderPriceSumCalculator orderPriceSumCalculator = new OrderPriceSumCalculator();
+        DiscountedPriceSumCalculator discountedPriceSumCalculator = new DiscountedPriceSumCalculator();
         //when
-        as.Visit(orderPriceSumCalculator);
+        as.Visit(discountedPriceSumCalculator);
         //result
-        Assert.assertEquals(32f, (float) orderPriceSumCalculator.sumMantisa.sum, 0f);
+        Assert.assertEquals(32f, (float) discountedPriceSumCalculator.sumMantisa.sum, 0f);
         Assert.assertEquals(DefaultStatus.W_Przygotowaniu, as.status);
     }
 

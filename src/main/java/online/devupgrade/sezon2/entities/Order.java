@@ -65,7 +65,11 @@ public class Order extends Product {
 
     public Future<Object> Visit(IVisitor visitor) {
         ExecutorService executorService = Executors.newFixedThreadPool(THREADS);
-        Optional result = visitor.visit(products, Optional.of(Map.of("discount", discountEntities == null ? new ArrayList<>() : discountEntities)));
+        Map<String, Object> params = new HashMap<>();
+        params.put("discount", discountEntities == null ? new ArrayList<>() : discountEntities);
+        Optional result = visitor.visit(products, Optional.of(
+                params
+        ));
         if (result.isPresent())
             return executorService.submit(new Callable<Object>() {
                 @Override
