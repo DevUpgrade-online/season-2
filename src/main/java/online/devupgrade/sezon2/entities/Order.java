@@ -3,14 +3,8 @@ package online.devupgrade.sezon2.entities;
 import online.devupgrade.sezon2.helper.IOrderStatus;
 import online.devupgrade.sezon2.helper.IVisitor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import javax.persistence.*;
+import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -34,6 +28,9 @@ public class Order extends Product {
     @OneToMany
     private List<Product> products;
 
+    @ManyToMany
+    private List<DiscountEntity> discountEntities;
+
     public List<Product> getProducts() {
         if (products == null) {
             products = new ArrayList<>();
@@ -41,21 +38,26 @@ public class Order extends Product {
         return products;
     }
 
+    public boolean setDiscountEntities(List<DiscountEntity> discountEntities) {
+        this.discountEntities = discountEntities;
+        return this.discountEntities != null || !this.discountEntities.isEmpty() ? true : false;
+    }
+
     public Order setProducts(List<Product> products, Optional<IOrderStatus> orderStatus) {
         if (products == null) {
             products = new ArrayList<>();
         }
-        if(orderStatus.isPresent() ) {
+        if (orderStatus.isPresent()) {
             status = orderStatus.get();
         } else {
-            if(products.size() > 0) {
+            if (products.size() > 0) {
                 status = DefaultStatus.W_Przygotowaniu;
             }
         }
         boolean result = products.stream()
                 .anyMatch(product -> product instanceof NotAProductProduct); //pattern matching
         this.products = products;
-        if(result) {
+        if (result) {
             return new NotReallyOrderOrder(this);
         }
         return this;
@@ -63,16 +65,19 @@ public class Order extends Product {
 
     public Future<Object> Visit(IVisitor visitor) {
         ExecutorService executorService = Executors.newFixedThreadPool(THREADS);
-
-         Optional result =visitor.visit(products, Optional.of(Map.of()));
-         if (result.isPresent())
-             return executorService.submit(new Callable<Object>() {
-                 @Override
-                 public Object call() throws Exception {
-                     return result;
-                 }
-             });
-         throw new IllegalStateException("Nie bede tu!");
+        Map<String, Object> params = new HashMap<>();
+        params.put("discount", discountEntities == null ? new ArrayList<>() : discountEntities);
+        Optional result = visitor.visit(products, Optional.of(
+                params
+        ));
+        if (result.isPresent())
+            return executorService.submit(new Callable<Object>() {
+                @Override
+                public Object call() throws Exception {
+                    return result;
+                }
+            });
+        throw new IllegalStateException("Nie bede tu!");
     }
 }
 
