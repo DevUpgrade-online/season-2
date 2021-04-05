@@ -14,6 +14,7 @@ class FindOrdersCommandHandler implements CommandHandler {
     @Autowired
     ProductManagerLogicService productManagerLogicService;
 
+
     @Override
     public void handle(Command command) {
         if (command instanceof FindOrdersCommand) {

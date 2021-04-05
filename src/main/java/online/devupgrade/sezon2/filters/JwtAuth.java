@@ -1,4 +1,4 @@
-package online.devupgrade.sezon2.configs;
+package online.devupgrade.sezon2.filters;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,4 +1,4 @@
-package online.devupgrade.sezon2.configs;
+package online.devupgrade.sezon2.services;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;

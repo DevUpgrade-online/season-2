@@ -1,4 +1,4 @@
-package online.devupgrade.sezon2.configs;
+package online.devupgrade.sezon2.services;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
