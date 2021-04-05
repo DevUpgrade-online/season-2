@@ -27,7 +27,7 @@ public class DiscountedPriceSumCalculator implements IVisitor {
                                 discountEntity -> {
                                     if(discountEntity.getIncluded() != null && !discountEntity.getIncluded().isEmpty()) {
                                         if (discountEntity.getIncluded().stream().anyMatch( a -> a.id == product.id) ) {
-                                            sumMantisa.add(product.getPrice() - ((product.getPrice() * discountEntity.getValue()) / 100 ));
+                                            sumMantisa.add(product.getPrice(true, product.getPrice() - ((product.getPrice() * discountEntity.getValue()) / 100 )));
                                         } else {
                                             sumMantisa.add(product.getPrice());
                                         }
@@ -42,10 +42,10 @@ public class DiscountedPriceSumCalculator implements IVisitor {
 
                                                 }
                                             } else {
-                                                sumMantisa.add(product.getPrice() - ((product.getPrice() * discountEntity.getValue()) / 100 ));
+                                                sumMantisa.add(product.getPrice(true, product.getPrice() - ((product.getPrice() * discountEntity.getValue()) / 100 )));
                                             }
                                         } else {
-                                            sumMantisa.add(product.getPrice() - ((product.getPrice() * discountEntity.getValue()) / 100 ));
+                                            sumMantisa.add(product.getPrice(true, product.getPrice() - ((product.getPrice() * discountEntity.getValue()) / 100 )));
                                         }
                                     }
                                 }
