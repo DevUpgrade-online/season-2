@@ -15,4 +15,24 @@ public class OrderDTO {
     public OrderDTO(Order order, List<Product> productsFromOrder) {
 
     }
+
+    public static OrderDTO getEmpty() {
+        return empty;
+    }
+
+    public static void setEmpty(OrderDTO empty) {
+        OrderDTO.empty = empty;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public OrderDTO(Integer id) {
+        this.id = id;
+    }
 }

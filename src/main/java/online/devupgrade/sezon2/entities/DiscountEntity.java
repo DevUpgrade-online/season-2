@@ -1,9 +1,6 @@
 package online.devupgrade.sezon2.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -16,6 +13,11 @@ public class DiscountEntity implements Serializable {
 
     Long value;
 
+    @ElementCollection
+    @CollectionTable(name = "roles", joinColumns = @JoinColumn(name = "id"))
+    @Column(name = "role")
+    private List<String> roles;
+
     @ManyToMany
     List<Product> included;
 
@@ -27,6 +29,14 @@ public class DiscountEntity implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 
     public void setValue(Long value) {
