@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 
 public class EnterpriseOrderConstructorTests {
     /*
@@ -19,20 +20,21 @@ public class EnterpriseOrderConstructorTests {
     Zamówienie jest w stanie przygotowania (bo w jakim innym jak ma dwa produkty)
      */
     @Test
-    public void testOrderCompletePriceCalculator_green() {
+    public void testOrderCompletePriceCalculator_green() throws ExecutionException, InterruptedException {
         //Given
         ArrayList<Product> prods = getDefaultProductList();
         Order as = new Order();
         as.setProducts(prods, Optional.empty());
         OrderPriceSumCalculator orderPriceSumCalculator = new OrderPriceSumCalculator();
         //when
-        as.Visit(orderPriceSumCalculator);
+        Object result = as.Visit(orderPriceSumCalculator).get();
         //result
+        Assert.assertEquals(Optional.of(Boolean.TRUE), result);
         Assert.assertEquals(100f, (float) orderPriceSumCalculator.sumMantisa.sum, 0f);
         Assert.assertEquals(DefaultStatus.W_Przygotowaniu, as.status);
     }
     @Test
-    public void testOrderCompletePriceCalculatorWithDiscount_green() {
+    public void testOrderCompletePriceCalculatorWithDiscount_green() throws ExecutionException, InterruptedException {
         //Given
         ArrayList<Product> prods = getDefaultProductList();
         Order as = new Order();
@@ -42,15 +44,15 @@ public class EnterpriseOrderConstructorTests {
         as.setProducts(prods, Optional.empty());
         DiscountedPriceSumCalculator discountedPriceSumCalculator = new DiscountedPriceSumCalculator();
         //when
-        as.Visit(discountedPriceSumCalculator);
-
+        Object result = as.Visit(discountedPriceSumCalculator).get();
         //result
+        Assert.assertEquals(Optional.of(Boolean.TRUE), result);
         Assert.assertEquals(80f, (float) discountedPriceSumCalculator.sumMantisa.sum, 0f);
         Assert.assertEquals(DefaultStatus.W_Przygotowaniu, as.status);
     }
 
     @Test
-    public void testOrderCompletePriceCalculatorWithDiscountExcluded_green() {
+    public void testOrderCompletePriceCalculatorWithDiscountExcluded_green() throws ExecutionException, InterruptedException {
         //Given
         ArrayList<Product> prods = getDefaultProductList();
         Order as = new Order();
@@ -61,8 +63,9 @@ public class EnterpriseOrderConstructorTests {
         as.setProducts(prods, Optional.empty());
         DiscountedPriceSumCalculator discountedPriceSumCalculator = new DiscountedPriceSumCalculator();
         //when
-        as.Visit(discountedPriceSumCalculator);
+        Object result = as.Visit(discountedPriceSumCalculator).get();
         //result
+        Assert.assertEquals(Optional.of(Boolean.TRUE), result);
         Assert.assertEquals(32f, (float) discountedPriceSumCalculator.sumMantisa.sum, 0f);
         Assert.assertEquals(DefaultStatus.W_Przygotowaniu, as.status);
     }
