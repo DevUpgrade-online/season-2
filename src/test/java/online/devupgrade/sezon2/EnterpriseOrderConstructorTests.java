@@ -70,10 +70,10 @@ public class EnterpriseOrderConstructorTests {
     private ArrayList<Product> getDefaultProductList() {
         Product first = new Product();
         first.id = 1;
-        first.setPrice(60f);
+        first.setPrice(60.0f);
         Product second = new Product();
         second.id = 2;
-        second.setPrice(40f);
+        second.setPrice(40.0f);
         ArrayList<Product> prods = new ArrayList<>();
         prods.add(first);
         prods.add(second);
