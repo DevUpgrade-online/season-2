@@ -1,5 +1,6 @@
 package online.devupgrade.sezon2.repositories;
 
+import online.devupgrade.sezon2.entities.Order;
 import online.devupgrade.sezon2.entities.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,16 @@ public class ProductRepo {
     }
 
     public static Object persist(Object p1) {
-        //TODO sql
+        staticProductRepositories.save((Product)p1);
         return p1;
+    }
+
+    public Product getProduct(Integer i){
+        try {
+            return staticProductRepositories.findAll().stream().filter(a-> !(a instanceof Order)).filter(x -> x.id == i).findFirst().get();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Autowired

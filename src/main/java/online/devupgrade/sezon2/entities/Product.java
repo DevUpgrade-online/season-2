@@ -5,6 +5,7 @@ import com.sun.istack.NotNull;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.security.SecureRandom;
 import java.util.Arrays;
 
 @Entity
@@ -13,6 +14,7 @@ public class Product implements Pricable {
     @Id
     @GeneratedValue
     public Integer id;
+    public Integer originId;
 
     @NotNull
     private float price;
@@ -22,6 +24,25 @@ public class Product implements Pricable {
     protected boolean isPriceGetOnce;
 
     private static final String KROPKA = ".";
+
+    public Product() {
+
+    }
+
+    public Integer getOriginId() {
+        return originId;
+    }
+
+    public void setOriginId(Integer originId) {
+        this.originId = originId;
+    }
+
+    public Product(Integer id, float price, float pricePoPrzecinku, boolean isPriceGetOnce) {
+        this.id = id;
+        this.price = price;
+        this.pricePoPrzecinku = pricePoPrzecinku;
+        this.isPriceGetOnce = isPriceGetOnce;
+    }
 
     @Override
     public Float getPrice() {
@@ -50,7 +71,12 @@ public class Product implements Pricable {
 
     @Override
     public String toString() {
-        return String.format("%d.%dPLN", price, pricePoPrzecinku);
+
+        try {
+            return String.format("%d.%dPLN", price, pricePoPrzecinku);
+        } catch (Exception e) {
+            return ""+price;
+        }
     }
 }
 

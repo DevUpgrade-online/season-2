@@ -43,6 +43,13 @@ public class Order extends Product {
         return this.discountEntities != null || !this.discountEntities.isEmpty() ? true : false;
     }
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                '}';
+    }
+
     public Order setProducts(List<Product> products, Optional<IOrderStatus> orderStatus) {
         if (products == null) {
             products = new ArrayList<>();

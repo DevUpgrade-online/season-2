@@ -7,9 +7,7 @@ import online.devupgrade.sezon2.entities.Order;
 import online.devupgrade.sezon2.utils.Command;
 import online.devupgrade.sezon2.utils.CommandHandler;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
 public class CreateEmptyOrderCommandHandler implements CommandHandler {
 
     @Autowired

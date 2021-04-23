@@ -8,4 +8,6 @@
     </bean>
     <bean id="FindOrdersCommand" class="online.devupgrade.sezon2.services.FindOrdersCommandHandler">
     </bean>
+    <bean id="AddProductToOrderCommand" class="online.devupgrade.sezon2.services.AddProductToOrderCommandHandler">
+    </bean>
 </beans>

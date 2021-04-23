@@ -13,7 +13,7 @@ public class OrderDTO {
     private Integer id;
 
     public OrderDTO(Order order, List<Product> productsFromOrder) {
-
+        this.id = order.id;
     }
 
     public static OrderDTO getEmpty() {
