@@ -1,12 +1,11 @@
 package online.devupgrade.sezon2;
 
-import online.devupgrade.sezon2.dto.CreateEmptyOrderCommand;
-import online.devupgrade.sezon2.dto.FindOrdersCommand;
-import online.devupgrade.sezon2.dto.OrderDTO;
-import online.devupgrade.sezon2.dto.ResultTransporterException;
+import online.devupgrade.sezon2.dto.*;
 import online.devupgrade.sezon2.utils.CommandHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -37,6 +36,18 @@ public class RestOrderController {
         try {
             String commandName = CreateEmptyOrderCommand.class.getSimpleName();
             handler.get(commandName).handle(new CreateEmptyOrderCommand());
+        } catch (ResultTransporterException e) {
+            return (OrderDTO) e.getData();
+        }
+        System.out.println("nie udalo sie");
+        return OrderDTO.empty;
+    }
+
+    @PostMapping("/post/v1/products/add/json/{id}")
+    OrderDTO create(@PathVariable Integer id, @RequestBody ProductDto productDto) {
+        try {
+            String commandName = AddProductToOrderCommand.class.getSimpleName();
+            handler.get(commandName).handle(new AddProductToOrderCommand(productDto.getId(), id));
         } catch (ResultTransporterException e) {
             return (OrderDTO) e.getData();
         }

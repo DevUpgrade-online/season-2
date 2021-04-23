@@ -7,6 +7,7 @@ import online.devupgrade.sezon2.entities.Order;
 import online.devupgrade.sezon2.entities.Product;
 import online.devupgrade.sezon2.repositories.DiscountRepo;
 import online.devupgrade.sezon2.repositories.OrderRepo;
+import online.devupgrade.sezon2.repositories.ProductRepo;
 import online.devupgrade.sezon2.utilshelpers.DatabaseUtilsHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -24,6 +25,8 @@ public class ProductManagerLogicService {
     private OrderRepo orderRepo;
     @Autowired
     private DiscountRepo discountRepo;
+    @Autowired
+    private ProductRepo productRepo;
 
     public OrderDTO loadOrder(Integer orderId) {
         Order order = orderRepo.load(orderId);
@@ -53,5 +56,15 @@ public class ProductManagerLogicService {
 
     public void setOrderRepo(OrderRepo orderRepo) {
         this.orderRepo = orderRepo;
+    }
+
+    public void orderAddProduct(Integer orderId, Integer productId) {
+        try {
+            Product product = productRepo.getProduct(productId);
+            Order load = orderRepo.load(orderId);
+            load.getProducts().add(product);
+        } catch (Exception e) {
+
+        }
     }
 }

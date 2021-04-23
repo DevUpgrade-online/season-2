@@ -22,6 +22,10 @@ public class ProductRepo {
         return p1;
     }
 
+    public Product getProduct(Integer i){
+        return staticProductRepositories.findAll().stream().filter(x -> x.id == i).findFirst().get();
+    }
+
     @Autowired
     public void setRepo(ProductRepositoriesImpl staticProductRepositories){
         ProductRepo.staticProductRepositories = staticProductRepositories;
