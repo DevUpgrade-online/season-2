@@ -4,6 +4,8 @@ import online.devupgrade.sezon2.entities.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -13,6 +15,8 @@ public class OrderRepo {
 
     @Autowired
     OrderRepositoryImpl orderRepository;
+    @Autowired
+    EntityManager entityManager;
 
     public Order load(Integer orderId) {
         return orderRepository.findById(orderId).isPresent() ? orderRepository.findById(orderId).get() : null;
@@ -26,4 +30,5 @@ public class OrderRepo {
     public Order save(Order o) {
         return orderRepository.save(o);
     }
+
 }

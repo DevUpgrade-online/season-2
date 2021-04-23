@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -62,9 +63,23 @@ public class ProductManagerLogicService {
         try {
             Product product = productRepo.getProduct(productId);
             Order load = orderRepo.load(orderId);
+            if(product == null) {
+                throw new NoSuchElementException("Skonczyly sie takie produkty w bazie danych");
+            }
+            if(load == null) {
+                throw new NoSuchElementException("Zamowienie takie nie jest w bazie teraz, probó/uj później");
+            }
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String currentPrincipalName = authentication.getName();
+            Object credentials = authentication.getCredentials();
+//            Product newProduct = new Product();
+//            newProduct.setPrice(product.getPrice());
             load.getProducts().add(product);
+//            ProductRepo.persist(newProduct);
+            orderRepo.save(load);
         } catch (Exception e) {
-
+            System.err.println("Something goes no yes");
+        } finally {
         }
     }
 }
