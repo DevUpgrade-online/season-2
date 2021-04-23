@@ -59,11 +59,11 @@ class XXxxxUtils {
     public static final String KROPKA = ".";
 
     static float[] convert(float price) {
-        Float first = Arrays.asList(Float.valueOf(price).toString().split(KROPKA)).stream().findFirst().map(p -> Float.valueOf(p)).get();
-        Float second = Arrays.asList(Float.valueOf(price).toString().split(KROPKA))
+        Float first = Arrays.asList(Float.valueOf(price).toString().replace(KROPKA, " ").split(" ")).stream().findFirst().map(p -> Float.valueOf(p)).get();
+        Float second = Arrays.asList(Float.valueOf(price).toString().replace(KROPKA, " ").split(" "))
             .stream()
             .map(p -> Float.valueOf(p))
-            .filter(p -> p != first)
+            .filter(p -> !p.equals(first))
             .findFirst().get();
         float[] result = new float[2];
         result[0] = first;
